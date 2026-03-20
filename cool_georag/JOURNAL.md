@@ -1,6 +1,6 @@
 # GeoRAG Development Journal
 
-A step-by-step log of building the GeoRAG system for an interview task.
+A step-by-step log of building the GeoRAG system
 
 ---
 
