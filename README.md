@@ -253,9 +253,9 @@ after the first successful run, so subsequent `ingest` calls are instant.
 
 2. **Query:** When you ask *"best sushi near Europaplatz?"*, your question is also converted to a vector.  Milvus finds the 5 place vectors that are mathematically closest (most similar in meaning).
 
-2.5 **Reranking:** Retrieved candidates are reranked using a hybrid score that combines semantic relevance and distance from your location.
+3. **Reranking:** Retrieved candidates are reranked using a hybrid score that combines semantic relevance and distance from your location.
 
-3. **Generation:** The 5 retrieved place descriptions are passed to Mistral as context, together with your question. The model then generates the final answer from that context.
+4. **Generation:** The 5 retrieved place descriptions are passed to Mistral as context, together with your question. The model then generates the final answer from that context.
 
 ---
 
