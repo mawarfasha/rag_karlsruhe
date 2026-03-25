@@ -279,14 +279,11 @@ This step records the system quality judgement after end-to-end testing.
     - Broad `>=` constraints existed in `requirements.txt`.
     - This created compatibility risk across `llama-index`, `sentence-transformers`, and `transformers` updates.
 
-4. **Task description file quality issue (medium priority)**
-    - Accidental command text injection/corruption existed in `Georag-system-task-description.md`.
-
-5. **Map HTML safety hardening needed (medium priority)**
+4. **Map HTML safety hardening needed (medium priority)**
     - Query/place text was directly interpolated into map HTML without escaping.
     - Risk is low for local use, but still worth hardening.
 
-6. **Compose warning cleanup (low priority)**
+5. **Compose warning cleanup (low priority)**
     - `docker-compose.yml` still included an obsolete `version` key.
 
 ### Runtime output judgement
@@ -404,9 +401,8 @@ This checklist was used after each code change to confirm measurable improvement
 | F1 | Add location-aware reranking in `rag_pipeline.py` | Run same query with two different user locations and confirm top results/routing change logically by distance + relevance | PASS | Verified with `--show-sources`: ordering differs by location (e.g., rank 3/4 swapped between two locations). |
 | F2 | Align `README.md` with Docker Milvus architecture | Compare README setup text against actual runtime commands and ports used in `config.py` and `docker-compose.yml` | PASS | README now documents Docker Milvus (`docker compose up -d`, `http://localhost:19530`) and hybrid reranking note. |
 | F3 | Pin tested dependency versions | Fresh `venv` install from `requirements.txt`, then run `python main.py check`, `python main.py ingest`, and one `ask` query successfully | PASS | Installed pinned set in `.venv`, `check` passed, `ingest` passed (1661 docs), and `ask` passed in fallback mode. |
-| F4 | Clean corrupted `Georag-system-task-description.md` | Manually review markdown for accidental terminal text and verify clean render in editor preview | PASS | Removed accidental command injection text in Environment Setup section. |
-| F5 | Escape dynamic HTML in `route_visualizer.py` | Insert a query containing `<script>`-like characters and verify map HTML displays escaped text (no script execution) | PASS | Verified in `outputs/route_map.html`: query appears escaped as `&lt;script&gt;...&lt;/script&gt;`. |
-| F6 | Remove obsolete compose `version` field | Run `docker compose up -d` and confirm warning about obsolete `version` no longer appears | PASS | Compose starts containers without obsolete `version` warning. |
+| F4 | Escape dynamic HTML in `route_visualizer.py` | Insert a query containing `<script>`-like characters and verify map HTML displays escaped text (no script execution) | PASS | Verified in `outputs/route_map.html`: query appears escaped as `&lt;script&gt;...&lt;/script&gt;`. |
+| F5 | Remove obsolete compose `version` field | Run `docker compose up -d` and confirm warning about obsolete `version` no longer appears | PASS | Compose starts containers without obsolete `version` warning. |
 
 ### Suggested test command set (post-fix)
 
